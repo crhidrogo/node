@@ -8,12 +8,12 @@ const http = require('http')
 // create a function reference to handle request and response
 // request part => contains data about the request
 // response part => instructs how to send a response
-function rqListener(req, res) {
+// function rqListener(req, res) {
 
-}
+// }
 
 // event driven 
-http.createServer()
+// http.createServer()
 
 // // function can also be passed "anonymously"
 
@@ -22,8 +22,10 @@ http.createServer()
 // });
 
 // Also as an arrow function
-// http.createServer((req, res)  => {
-    // do stuff here
-// });
+const server = http.createServer((req, res)  => {
+    console.log(req)
+});
 
-
+// keep server running
+// provide port as argument, e.g. 3000; localhost is default.
+server.listen(3000);
