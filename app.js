@@ -65,11 +65,13 @@ const server = http.createServer((req, res)  => {
         // redirect to / and saves file with message content
         const body = [];
         req.on('data', (data_chunk) => {
+            console.log("data_chunk is below:");
             console.log(data_chunk);
             body.push(data_chunk);
         }); // listen to which event? data!
         req.on('end', () =>{
             const parsedBody = Buffer.concat().toString();
+            console.log("parsedBody is below:");
             console.log(parsedBody);
         });
         fs.writeFileSync('message.txt', 'HARD CODED TEXT');
