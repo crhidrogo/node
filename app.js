@@ -21,9 +21,24 @@ const http = require('http')
 //     // do stuff here
 // });
 
+/* JAVASCRIPT LANGUAGE NOTE
+=== does not convert the types of the operands before comparing;
+it includes a type check.
+
+== converts the type temporarily to check; the actual types of vars do not change
+
+*/
+
 // Also as an arrow function
 const server = http.createServer((req, res)  => {
     console.log(req)
+    const url = req.url; // access the url routes
+    if (url == '/')
+
+    // Can manipulate server response directly with res object
+    // Example: set headers
+    res.setHeader('Content-Type', 'text/html');
+    res.end()
 });
 
 // keep server running
