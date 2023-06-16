@@ -33,12 +33,21 @@ it includes a type check.
 const server = http.createServer((req, res)  => {
     console.log(req)
     const url = req.url; // access the url routes
-    if (url == '/')
+    if (url === '/') {
+        res.write('<html>');
+        res.write('<head><title>Enter Message</title></head>');
+        // by naming the input it will automatically assign the value inputed to a var named 'message'
+        res.write('<body><form action="/message" method="POST" ><input type="text" name="message"><button type="submit">send</button></form></body>');
+        res.write('</html>');
+        return res.end(); // quits from if-statement so it doesn't continue
+    }
 
     // Can manipulate server response directly with res object
     // Example: set headers
-    res.setHeader('Content-Type', 'text/html');
-    res.end()
+    // res.setHeader('Content-Type', 'text/html');
+
+    // need to signal end of response
+    // res.end()
 });
 
 // keep server running
