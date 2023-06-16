@@ -33,6 +33,8 @@ it includes a type check.
 const server = http.createServer((req, res)  => {
     console.log(req)
     const url = req.url; // access the url routes
+    const method = req.method; // access method such as GET or POST
+
     if (url === '/') {
         res.write('<html>');
         res.write('<head><title>Enter Message</title></head>');
@@ -42,11 +44,15 @@ const server = http.createServer((req, res)  => {
         return res.end(); // quits from if-statement so it doesn't continue
     }
 
+    if (url === '/message' && method === 'POST') {
+        // redirect to / and saves file with message content
+    }
+
     // Can manipulate server response directly with res object
     // Example: set headers
     res.setHeader('Content-Type', 'text/html');
     res.write('<html>');
-    res.write('<head><title>Home Page</title></head>');
+    res.write('<head><title>First Page</title></head>');
     res.write('<body><h1>Hello from my Node.js server!</h1></body>');
     res.write('</html>');
 
