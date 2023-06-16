@@ -29,6 +29,21 @@ it includes a type check.
 
 == converts the type temporarily to check; the actual types of vars do not change
 
+Javascript sends incoming data as a stream of data
+
+const variables can be edited, but not reassigned.
+
+*/
+
+/* NODE SPECIFIC NOTES
+Node handles incoming, ongoing streams of data by separating the stream into parts.
+http.createServer automatically creates and event listener.
+req.on() listens for a given event
+req.on('data', func) => whenever a chunk of data is ready this will activate
+given function
+
+Buffer is globablly available module from Node
+
 */
 
 // Also as an arrow function
@@ -48,6 +63,15 @@ const server = http.createServer((req, res)  => {
 
     if (url === '/message' && method === 'POST') {
         // redirect to / and saves file with message content
+        const body = [];
+        req.on('data', (data_chunk) => {
+            console.log(data_chunk);
+            body.push(data_chunk);
+        }); // listen to which event? data!
+        req.on('end', () =>{
+            const parsedBody = Buffer.concat().toString();
+            console.log(parsedBody);
+        });
         fs.writeFileSync('message.txt', 'HARD CODED TEXT');
         res.statusCode = 302; // 302 status code indicates redirection
         res.setHeader('Location', '/')
