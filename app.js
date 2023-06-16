@@ -44,7 +44,11 @@ const server = http.createServer((req, res)  => {
 
     // Can manipulate server response directly with res object
     // Example: set headers
-    // res.setHeader('Content-Type', 'text/html');
+    res.setHeader('Content-Type', 'text/html');
+    res.write('<html>');
+    res.write('<head><title>Home Page</title></head>');
+    res.write('<body><h1>Hello from my Node.js server!</h1></body>');
+    res.write('</html>');
 
     // need to signal end of response
     // res.end()
