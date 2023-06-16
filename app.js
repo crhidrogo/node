@@ -3,7 +3,9 @@
 // omit ./ for core global js files
 
 // import js module 'http'
-const http = require('http')
+const http = require('http');
+// import js module 'file system'
+const fs = require('fs');
 
 // create a function reference to handle request and response
 // request part => contains data about the request
@@ -46,6 +48,12 @@ const server = http.createServer((req, res)  => {
 
     if (url === '/message' && method === 'POST') {
         // redirect to / and saves file with message content
+        fs.writeFileSync('message.txt', 'HARD CODED TEXT');
+        res.statusCode = 302; // 302 status code indicates redirection
+        res.setHeader('Location', '/')
+        return res.end()
+
+        
     }
 
     // Can manipulate server response directly with res object
