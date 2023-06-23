@@ -48,7 +48,7 @@ Buffer is globablly available module from Node
 
 // Also as an arrow function
 const server = http.createServer((req, res)  => {
-    console.log(req)
+    // console.log(req)
     const url = req.url; // access the url routes
     const method = req.method; // access method such as GET or POST
 
@@ -70,11 +70,13 @@ const server = http.createServer((req, res)  => {
             body.push(data_chunk);
         }); // listen to which event? data!
         req.on('end', () =>{
-            const parsedBody = Buffer.concat().toString();
+            const parsedBody = Buffer.concat(body).toString();
             console.log("parsedBody is below:");
             console.log(parsedBody);
+            const message = parsedBody.split('=')[1]
+            fs.writeFileSync('message.txt', message)
         });
-        fs.writeFileSync('message.txt', 'HARD CODED TEXT');
+        //fs.writeFileSync('message.txt', 'HARD CODED TEXT');
         res.statusCode = 302; // 302 status code indicates redirection
         res.setHeader('Location', '/')
         return res.end()
